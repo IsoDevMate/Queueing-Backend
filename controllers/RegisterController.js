@@ -1,5 +1,5 @@
 import User from '../models/schema';
-//exports.register = async (req, res) => {
+exports.register = async (req, res) => {
 const createUser= async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
@@ -16,7 +16,7 @@ const createUser= async (req, res) => {
 
         const saltRounds = 10;
         const salt = await bcrypt.genSalt(saltRounds);
-        user.email = await bcrypt.hash(user.password, salt);
+        user.email = await bcrypt.hash(user.email, salt);
 
         user = await user.save();
         return user;
@@ -26,3 +26,7 @@ const createUser= async (req, res) => {
         return null; // Return null to indicate an error
     }
 };
+
+createUser()
+
+}
