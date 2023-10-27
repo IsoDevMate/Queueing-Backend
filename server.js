@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 connectDB(); 
 
 // apis
-app.use()
+//app.use()
 
 
 // test db connection
