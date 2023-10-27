@@ -13,13 +13,13 @@ const UserSChema=mongoose.Schema({
         minlength:6,
         maxlength:133,
     },
-    phoneNumber {
+    phoneNumber: {
       type: String,
        required: true,
        minlength: 10,
        maxlength: 10,
-}
-})
+},
+});
 
 const User=mongoose.model('User',UserSChema);
 
