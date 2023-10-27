@@ -18,7 +18,7 @@ const UserSChema=mongoose.Schema({
        required: true,
        minlength: 10,
        maxlength: 10,
-},
+},})
 
 const User=mongoose.model('User',UserSChema);
 
