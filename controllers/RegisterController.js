@@ -26,4 +26,7 @@ const createUser= async (req, res) => {
         return null; // Return null to indicate an error
     }
 };
+
+createUser()
+
 }
