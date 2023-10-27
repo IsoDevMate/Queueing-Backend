@@ -1,5 +1,5 @@
 const mongoose= require('mongoose');
-const UserSChema=mongoose.Schema({
+const UserSchema=mongoose.Schema({
     name:{
         type:String,
         required:true,
@@ -19,6 +19,7 @@ const UserSChema=mongoose.Schema({
        minlength: 10,
        maxlength: 10,
 },
+});
 
 const User=mongoose.model('User',UserSChema);
 

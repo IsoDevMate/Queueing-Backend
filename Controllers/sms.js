@@ -1,6 +1,8 @@
 const app = require('express')();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config();
+
 const AfricasTalking = require('africastalking')({
     apiKey: process.env.API_KEY,
     username: process.env.USERNAME
