@@ -43,7 +43,16 @@ const connectDB = async () => {
         ];
 
         for (const service of services) {
-            await Service.create(service);
+            // Check if the service already exists in the database
+            const existingService = await Service.findOne({ service_id: service.service_id });
+
+            // If the service does not exist, create it
+            if (!existingService) {
+                await Service.create(service);
+                console.log(`Service ${service.service_id} has been created.`);
+            } else {
+                console.log(`Service ${service.service_id} already exists.`);
+            }
         }
         console.log('Services have been populated in the database.');
     } catch (err) {

@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const User =require('../models/schema');
 exports.createUser = async (req, res,next) => {
     try {
+        const service = req.body.service;
         let user = await User.findOne({ email: req.body.email });
         if (user) {
             res.status(400).send('User already exists...');
@@ -11,6 +12,7 @@ exports.createUser = async (req, res,next) => {
         }
 
         user = new User({
+            service:service,
             name: req.body.name,
             email: req.body.email,
             phoneNumber: req.body.phoneNumber,
@@ -57,7 +59,7 @@ exports.createTicket = async (req, res) => {
 
         // Find the selected service
         const selectedService = await Service.findOne({ name: serviceName });
-
+        console.log("selected service:", selectedService);
         if (!selectedService) {
             res.status(400).send('Service not found');
             return null;
