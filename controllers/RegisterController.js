@@ -21,6 +21,7 @@ exports.createUser = async (req, res,next) => {
         const saltRounds = 10;
         const salt = await bcrypt.genSalt(saltRounds);
         user.email = await bcrypt.hash(user.email, salt);
+        user.phoneNumber = await bcrypt.hash(user.phoneNumber, salt);
         console.log("user:",user);
         user = await user.save();
         req.user = user; // Attach the user document to the request object
