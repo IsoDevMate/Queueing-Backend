@@ -2,10 +2,11 @@ const Service = require('../models/serviceschema');
 const Ticket = require('../models/ticketschema');
 const bcrypt = require('bcrypt');
 const User =require('../models/schema');
+const axios = require('axios');
 exports.createUser = async (req, res,next) => {
     try {
         const service = req.body.service;
-        let user = await User.findOne({ email: req.body.email });
+        let user = await User.findOne({ phone: req.body.phoneNumber});
         if (user) {
             res.status(400).send('User already exists...');
             return null; // Return null to indicate an error
@@ -21,7 +22,7 @@ exports.createUser = async (req, res,next) => {
         const saltRounds = 10;
         const salt = await bcrypt.genSalt(saltRounds);
         user.email = await bcrypt.hash(user.email, salt);
-        user.phoneNumber = await bcrypt.hash(user.phoneNumber, salt);
+       // user.phoneNumber = await bcrypt.hash(user.phoneNumber, salt);
         console.log("user:",user);
         user = await user.save();
         req.user = user; // Attach the user document to the request object
@@ -32,6 +33,7 @@ exports.createUser = async (req, res,next) => {
         res.status(500).send('Internal Server Error on user creation ');
         return null; // Return null to indicate an error
     }
+   
 };
 
 //const Service = require('../models/serviceschema');
@@ -89,3 +91,14 @@ exports.createTicket = async (req, res) => {
 };
 
 
+exports.callback=async(req,res)=>{
+   // const callbackurl=process.env.CALLBACK_URL;
+   const callbackurl="https://c959-41-212-65-143.ngrok-free.app"
+    const response=await axios.post(callbackurl,{
+        "phoneNumber":req.body.phoneNumber,
+        "service":req.body.service,
+        "ticket_status":req.body.ticket_status
+    })
+    res.send("success")
+    console.log("response:",response.data)
+}
