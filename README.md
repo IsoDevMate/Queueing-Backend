@@ -51,5 +51,12 @@ here is the response data they give us
 
 create a customer 
 create a booking 
-setu webhookm to notify admin 
+setup webhook to notify admin 
 add a pub/sub eg Bulljs publish to consumer which in this case maybe socket .io which pushes realtime data to the admin
+
+
+sandbox-sq0idb-X5OZsDbO-YaB1njSwZ2zhw  =app id
+EAAAEOlvtPdHqDa_Nr1Zvn11UeUumPh2d1nYXOex4YLrasylhnhfeM303vi5i5Bu  =app secret
+
+EAAAEOlvtPdHqDa_Nr1Zvn11UeUumPh2d1nYXOex4YLrasylhnhfeM303vi5i5Bu  =acces token
+ LNVT2RT2QV25R =location_id
