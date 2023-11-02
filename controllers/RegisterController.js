@@ -47,8 +47,10 @@ exports.createUser = async (req, res,next) => {
               referenceId: 'YOUR_REFERENCE_ID',
               note: 'a customer'
             });
+            
             onsole.log("Customer creation response:", response);
             console.log(response.result);
+            return customer.id;
           } catch(error) {
             console.log(error.message);
           }
