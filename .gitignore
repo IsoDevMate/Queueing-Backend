@@ -2,4 +2,3 @@
 node_modules/
 .env
 controller/squarelogic/customer.js
-test-utils
