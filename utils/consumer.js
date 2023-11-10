@@ -7,6 +7,7 @@ const defaultRedisConfig = {
     db: redisDatabaseNumber,
   },
 };
+
 //Consumer logic
 
 // Redis server Configuration 
