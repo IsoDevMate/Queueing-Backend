@@ -8,7 +8,8 @@ const TicketSchema = new mongoose.Schema({
     },
     ticket_status: {
         type: String,
-        required: true
+        required: true,
+         default: 'queued' // Can be 'queued', 'in progress', or 'completed'
     },
     ticket_no: {
         type: String,

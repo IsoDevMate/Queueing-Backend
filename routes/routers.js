@@ -1,10 +1,7 @@
 const router =require("express").Router()
-const { Tklogic }=require('../controllers/ticketlogic')
-const { Ticket }=require('../controllers/createTicket')
-const { CreateUser }=require('../controllers/RegisterController')    
-
-
-
-router.get('/create-ticket',Tklogic,Ticket)
-router.post('/create-user',CreateUser)
+const { createUser, createTicket }=require('../controllers/RegisterController')    
+const { Tklogic } = require("../controllers/ticketlogic")
+const { callback } = require("../controllers/RegisterController")
+router.post('/create-user', createUser,createTicket,Tklogic)
+router.post('/callback',callback)
 module.exports=router

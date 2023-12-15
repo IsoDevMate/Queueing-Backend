@@ -17,8 +17,8 @@ const UserSChema=mongoose.Schema({
       type: String,
        required: true,
        minlength: 10,
-       maxlength: 10,
-},
+       maxlength: 1000,
+},})
 
 const User=mongoose.model('User',UserSChema);
 

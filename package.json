@@ -4,20 +4,39 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon  server.js"
+    "start": "nodemon  server.js",
+    "dev": "nodemon test-utils/consumer.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@bull-board/api": "^5.9.1",
+    "@bull-board/express": "^5.9.1",
+    "@bull-board/ui": "^5.9.1",
     "africastalking": "^0.6.3",
     "axios": "^1.6.0",
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
+    "bull": "^4.11.4",
+    "bullmq": "^4.13.0",
+    "commander": "^7.2.0",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
+    "ejs": "^3.1.6",
     "express": "^4.18.2",
+    "joi": "^17.11.0",
+    "milliseconds": "^1.0.3",
     "mongodb": "^6.2.0",
     "mongoose": "^7.6.3",
-    "nodemon": "^3.0.1"
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1",
+    "readline": "^1.3.0",
+    "redis": "^4.6.10",
+    "socket.io": "^4.7.2",
+    "square": "^32.0.0",
+    "uuid": "^8.3.2",
+    "ws": "^8.14.2"
   }
 }
