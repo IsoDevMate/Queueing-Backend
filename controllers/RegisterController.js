@@ -29,7 +29,7 @@ exports.createUser = async (req, res,next) => {
             res.status(400).send('User already exists...');
             return null; // Return null to indicate an error
         }
- 
+        
         user = new User({
             service:service,
             name: req.body.name,
@@ -47,6 +47,7 @@ exports.createUser = async (req, res,next) => {
               referenceId: 'YOUR_REFERENCE_ID',
               note: 'a customer'
             });
+
             
             onsole.log("Customer creation response:", response);
             console.log(response.result);

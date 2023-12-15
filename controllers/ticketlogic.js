@@ -16,7 +16,7 @@ exports.Tklogic = async (req, res, next) => {
                     res.status(404).send('Ticket not found');
                     return;
                 }
-
+               
                 // Calculate estimated wait time
                 const queueLength = await TicketSchema.countDocuments({ status: 'queued' });
                 const avgServiceTime = 5; // minutes

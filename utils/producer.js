@@ -14,6 +14,7 @@ const queue = new Queue("myQueue", {
         defaultRedisConfig
     },
   });
+
 const {email}=req.body;
 const usersinqueue= await User.find({
     email: email,
@@ -21,6 +22,7 @@ const usersinqueue= await User.find({
 if (!usersinqueue) {
     return res.status(400).send("User already in queue...");
 }
+
 
 try{
 const controller = async (next) => {
@@ -72,3 +74,11 @@ const controllers = async () => {
 catch(error){
     console.log("job removal error",error.message);
 }
+//for the ticketing logic we need to create a queue for the tickets
+const waitingTime = async () => {
+  const jobs = await queue.getJobs(['waiting', 'active']);
+  const avgProcessingTime = 5;  // Average processing time per ticket in minutes
+  return jobs.length * avgProcessingTime;
+};
+
+console.log('Estimated waiting time:', await waitingTime(), 'minutes');
