@@ -51,5 +51,17 @@ here is the response data they give us
 
 create a customer 
 create a booking 
-setu webhookm to notify admin 
+setup webhook to notify admin 
 add a pub/sub eg Bulljs publish to consumer which in this case maybe socket .io which pushes realtime data to the admin
+
+
+
+EAAAEOlvtPdHqDa_Nr1Zvn11UeUumPh2d1nYXOex4YLrasylhnhfeM303vi5i5Bu  =app secret
+
+EAAAEOlvtPdHqDa_Nr1Zvn11UeUumPh2d1nYXOex4YLrasylhnhfeM303vi5i5Bu  =acces token
+ =location_id
+
+
+ ### STILL WORKING ON THE PRODUCER LOGIC 
+ producer.js file not fully wrking  it should add a ticket to the queue then chack if completed remove from the queue 
+ 
