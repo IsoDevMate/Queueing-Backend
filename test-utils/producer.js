@@ -38,7 +38,7 @@ ticketQueue.process(async(payload, done) => {
         console.log("Error processing the queue:", err);
     });
 
-//ADD morejobs to the queue 
+//ADD more jobs to the queue 
 
 const jobs=[...new Array[10]].map((_)=>({
     bun: "🍔",
