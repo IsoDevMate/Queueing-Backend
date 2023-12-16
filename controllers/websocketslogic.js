@@ -14,8 +14,6 @@ io.on('connection', socket=> {
 
   //we only need the ticket id,ticket no  and the service name
 const tickets= createTicket();
-
-
 // Emit 'ticket_booked' event
 
 io.emit('ticket-created',  { ticket_no: tickets.ticket_no });
@@ -24,5 +22,6 @@ io.emit('ticket-service',  { service: tickets.service });
  // Emit 'ticket_status_changed' event
 //    io.emit('ticket_status_changed', { ticketId: existingTicket._id, status: existingTicket.ticket_status });
 });
+
 server.listen(4040);
 
