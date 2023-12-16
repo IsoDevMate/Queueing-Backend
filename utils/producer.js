@@ -1,20 +1,84 @@
 
    // Processing logic
-const  User = require("../models/schema");
-const Ticket = require("../models/ticketschema");
-const { createTicket } = require("../controllers/RegisterController");
+//const  User = require("../models/schema");
+//const Ticket = require("../models/ticketschema");
+//const { createTicket } = require("../controllers/RegisterController");
 //const { setQueues, BullAdapter } = require("bull-board");
-   const Queue = require("bull");
-   const milliseconds = require("milliseconds");
-const { createTicket } = require("../controllers/RegisterController");
+ const Queue = require("bull");
+// const milliseconds = require("milliseconds");
 const defaultRedisConfig = require("./redis");
 
-const queue = new Queue("myQueue", {
+const queue = new Queue("basic-job-worker", {
     redis: {
         defaultRedisConfig
     },
   });
 
+async function publishjobs(){
+const processjob=await queue.add({
+   jobType:"email",
+  });
+  console.log(processjob);
+res.json({ id: processjob.id });
+
+
+const fetchdatafromotherapi=await queue.add({
+    jobType:"fetchdata",
+   });
+   console.log(fetchdatafromotherapi);
+   res.json({ id: fetchdatafromotherapi.id });
+
+
+ const doheavydboperation=await queue.add({
+    jobType:"dboperation",
+   });
+   console.log(doheavydboperation);
+   res.json({ id: doheavydboperation.id });
+
+
+   const sendnotification=await queue.add({
+    jobType:"notification",
+   });
+   console.log(sendnotification);  
+   res.json({ id: sendnotification.id });
+}
+
+publishjobs();
+
+
+ async function processjob(jobData){
+   if (jobData.jobType==="email"){
+       console.log("email job is processing");
+   }
+    else if (jobData.jobType==="fetchdata"){
+        console.log("fetchdata job is processing");
+    }
+    else if (jobData.jobType==="dboperation"){
+        console.log("dboperation job is processing");
+    }
+    else if (jobData.jobType==="notification"){
+        console.log("notification job is processing");
+    }
+    else{ 
+        console.log("job is not processing");
+    }
+
+   const job=await queue.process(async(job)=>{
+      console.log(job.data);
+      return job.data;
+  });
+  console.log(job);
+  res.json({ id: job.id });
+}
+processjob();
+
+/* const job=await queue.process(async(job)=>{
+        console.log(job.data);
+        return job.data;
+    });
+    console.log(job);
+    res.json({ id: job.id });
+  }
 const {email}=req.body;
 const usersinqueue= await User.find({
     email: email,
@@ -82,3 +146,4 @@ const waitingTime = async () => {
 };
 
 console.log('Estimated waiting time:', await waitingTime(), 'minutes');
+*/
