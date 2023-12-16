@@ -1,6 +1,13 @@
 
 const { createTicket,} = require('./RegisterController');
 
+  //we only need the ticket id,ticket no  and the service name
+// Replace with the actual service name seleted by the user from the frontend
+const service =`${req.body.service}`;
+const tickets = createTicket(null, null, null, service);
+
+
+
 const server = require('http').createServer();
 const io = require('socket.io')(server);
 io.on('connection', socket=> {
@@ -12,8 +19,8 @@ io.on('connection', socket=> {
 
   socket.send('Hello!');
 
-  //we only need the ticket id,ticket no  and the service name
-const tickets= createTicket();
+
+
 // Emit 'ticket_booked' event
 
 io.emit('ticket-created',  { ticket_no: tickets.ticket_no });

@@ -49,7 +49,7 @@ exports.createUser = async (req, res,next) => {
             });
 
             
-            onsole.log("Customer creation response:", response);
+            console.log("Customer creation response:", response);
             console.log(response.result);
             return customer.id;
           } catch(error) {
@@ -75,9 +75,10 @@ exports.createUser = async (req, res,next) => {
 
 //const Service = require('../models/serviceschema');
 
-exports.createTicket = async (req, res) => {
+exports.createTicket = async (req, res, next, service) => {
     try {
         const serviceName = req.body.service;
+        console.log("service name:",serviceName);
        // const service_id = req.body.service_id;
         const userId = req.user._id; // Get the user ID from the user document attached to the request object
         console.log("user id:",userId);
@@ -100,13 +101,14 @@ exports.createTicket = async (req, res) => {
             }
         }
 
-        // Find the selected service
-        const selectedService = await Service.findOne({ name: serviceName });
-        console.log("selected service:", selectedService);
-        if (!selectedService) {
-            res.status(400).send('Service not found');
-            return null;
-        }
+       // Use the provided 'service' parameter
+  const selectedService = await Service.findOne({ name: service });
+  if (!selectedService) {
+    // Handle the case when the service is not found
+    res.status(400).send('Service not found');
+    return null;
+  }
+
          //icket_no, user_id, and ticket_status
         // Create a new ticket
         const ticket = new Ticket({
@@ -148,23 +150,21 @@ try{
       console.log("Unexpected error occurred: ", error);
     }
   }
-  
-        console.log("ticket payload:", ticket);
-        await ticket.save();
-        console.log("ticket saved! Here is you ticket", ticket);
-        return ticket;
+  console.log("ticket payload:", ticket);
+  await ticket.save();
+  console.log("ticket saved! Here is your ticket", ticket);
+  return ticket;
+} catch (error) {
+  console.error(error);
+  res.status(500).send('Internal Server Error on ticket creation');
+  return null;
+}
 
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error on ticket creation');
-        return null;
-    }
-};
-
+}
 
 exports.callback=async(req,res)=>{
    // const callbackurl=process.env.CALLBACK_URL;
-   const callbackurl="https://c959-41-212-65-143.ngrok-free.app"
+   const callbackurl="https://1087-41-212-65-143.ngrok-free.app"
    try {
     const response = await client.bookingsApi.createBooking({
       idempotencyKey: 'a30ae72e-f9ed-4f71-a380-a189387e2bbd',

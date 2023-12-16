@@ -2,7 +2,9 @@
 //and updates the ticket status in the database also returns ticket object if successful
 //fuction should claculate the estimated waiting time for the ticket
 //tkwaitime=number of tickets in queue * average time to serve a ticket
+
 const TicketSchema = require('../models/ticketschema');
+
 exports.Tklogic = async (req, res, next) => {
     try {
         const ticket_no = req.params.ticket_no; // Assuming you pass the ticket number in the request parameters
@@ -16,14 +18,20 @@ exports.Tklogic = async (req, res, next) => {
                     res.status(404).send('Ticket not found');
                     return;
                 }
-               
+
+                // Check if the ticket is already in progress
+                if (ticket.status === 'in progress') {
+                    res.status(400).send('Ticket is already in progress');
+                    return;
+                }
+
                 // Calculate estimated wait time
                 const queueLength = await TicketSchema.countDocuments({ status: 'queued' });
-                const avgServiceTime = 5; // minutes
+                const avgServiceTime = 5; // Hardcoded average service time in minutes; consider making it configurable
                 const waitTime = queueLength * avgServiceTime;
 
                 // Update ticket status to 'in progress' and save to the database
-                ticket.status = 'queued';
+                ticket.status = 'in progress';
                 await ticket.save();
 
                 // Return updated ticket with wait time
@@ -40,6 +48,7 @@ exports.Tklogic = async (req, res, next) => {
         res.status(500).send('Internal Server Error');
     }
 }
+
 
 // Example usage:
 
