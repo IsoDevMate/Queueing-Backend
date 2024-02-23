@@ -113,7 +113,7 @@ exports.createTicket = async (req, res, next) => {
           });
 
           // Set the 'createdAt' property before making the booking request
-          ticket.createdAt = new Date(); // Replace this with the actual creation date
+       //   ticket.createdAt = new Date(); // Replace this with the actual creation date
 
           const response = await bookingsApi.createBooking({
               idempotencyKey: uuidv4(),

@@ -7,7 +7,7 @@ const connectDB=require('./db')
 const port = process.env.PORT || 5050;
 const bodyParser = require("body-parser");
 const  regticket = require("./routes/routers");
-
+const squareroutes = require("./Controllers/squarelogic/customer.js");
 
 // Check that all required .env variables exist
 if (!process.env["ENVIRONMENT"]) {
@@ -30,7 +30,7 @@ app.use(bodyParser.json());
  //Entry point for the app. Will redirect to the /services endpoint.
  
 app.get("/", async (req, res, next) => {
-  res.send("Welcome to our bukit backend API")
+ // res.send("Welcome to our bukit backend API")
   res.redirect("/services");
 });
 
@@ -39,6 +39,7 @@ connectDB();
 
 // apis
 app.use('/api', regticket)
+app.use('/api/v1', squareroutes)
 
 
 // test db connection

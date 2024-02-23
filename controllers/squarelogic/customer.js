@@ -1,17 +1,17 @@
 
 
-const dateHelpers = require("../util/date-helpers");
+const dateHelpers = require("../../util/date-helpers");
 const express = require("express");
 const router = express.Router();
 const {
   bookingsApi,
   catalogApi,
   customersApi,
-} = require("../util/square-client");
+} = require("../squarelogic/squareclient");
 const { v4: uuidv4 } = require("uuid");
 
 require("dotenv").config();
-const locationId = process.env["SQUARE_LOCATION_ID"];
+const locationId = process.env.SQUARE_LOCATION_ID;
 
 /**
  * POST /booking/create
@@ -32,7 +32,6 @@ router.post("/create", async (req, res, next) => {
   const serviceVariationVersion = req.query.version;
   const staffId = req.query.staffId;
   const startAt = req.query.startAt;
-
   const customerNote = req.body.customerNote;
   const emailAddress = req.body.emailAddress;
   const familyName = req.body.familyName;

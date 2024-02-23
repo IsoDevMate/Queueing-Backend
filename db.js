@@ -4,8 +4,6 @@ const Service = require('./models/serviceschema'); // Import your service schema
 const connectDB = async () => {
     try {
         await mongoose.connect(process.env.DATABASE_URL, {
-            useUnifiedTopology: true,
-            useNewUrlParser: true,
             writeConcern: { w: 'majority' }
         });
         console.log("Connected to DB");
